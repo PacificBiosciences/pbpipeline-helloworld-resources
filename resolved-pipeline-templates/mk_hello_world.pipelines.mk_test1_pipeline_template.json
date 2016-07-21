@@ -1,0 +1,25 @@
+{
+    "_comment": "Created pipeline mk_hello_world.pipelines.mk_test1 with pbsmrtpipe v0.42.1", 
+    "bindings": [], 
+    "description": "Pipeline mk_hello_world.pipelines.mk_test1 description", 
+    "entryPoints": [
+        {
+            "entryId": "e_01", 
+            "fileTypeId": "PacBio.FileTypes.txt", 
+            "name": "Entry Name: PacBio.FileTypes.txt", 
+            "tasks": [
+                {
+                    "index": 0, 
+                    "instanceId": 0, 
+                    "taskTypeId": "mk_hello_world.tasks.mk_simple_txt"
+                }
+            ]
+        }
+    ], 
+    "id": "mk_hello_world.pipelines.mk_test1", 
+    "name": "MK Test 1", 
+    "options": [], 
+    "tags": [], 
+    "taskOptions": [], 
+    "version": "0.1.0"
+}

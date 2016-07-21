@@ -1,0 +1,61 @@
+{
+    "driver": {
+        "env": {},
+        "exe": "hello-registry.py  run-rtc  ",
+        "serialization": "json"
+    },
+    "tool_contract": {
+        "_comment": "Created by v0.4.4",
+        "description": "Quick tool dev_filter_fasta mk_hello_world.tasks.dev_filter_fasta",
+        "input_types": [
+            {
+                "description": "description for PacBio.FileTypes.Fasta_0",
+                "file_type_id": "PacBio.FileTypes.Fasta",
+                "id": "Label PacBio.FileTypes.Fasta_0",
+                "title": "<FileType id=PacBio.FileTypes.Fasta name=file >"
+            }
+        ],
+        "is_distributed": false,
+        "name": "Tool dev_filter_fasta",
+        "nproc": 1,
+        "output_types": [
+            {
+                "default_name": "file",
+                "description": "description for <FileType id=PacBio.FileTypes.Fasta name=file >",
+                "file_type_id": "PacBio.FileTypes.Fasta",
+                "id": "Label PacBio.FileTypes.Fasta_0",
+                "title": "<FileType id=PacBio.FileTypes.Fasta name=file >"
+            }
+        ],
+        "resource_types": [],
+        "schema_options": [
+            {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "pb_option": {
+                    "default": 50,
+                    "description": "Option dev_fasta_min_length description",
+                    "name": "Option dev_fasta_min_length",
+                    "option_id": "mk_hello_world.task_options.dev_fasta_min_length",
+                    "type": "integer"
+                },
+                "properties": {
+                    "mk_hello_world.task_options.dev_fasta_min_length": {
+                        "default": 50,
+                        "description": "Option dev_fasta_min_length description",
+                        "title": "Option dev_fasta_min_length",
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "mk_hello_world.task_options.dev_fasta_min_length"
+                ],
+                "title": "JSON Schema for mk_hello_world.task_options.dev_fasta_min_length",
+                "type": "object"
+            }
+        ],
+        "task_type": "pbsmrtpipe.task_types.standard",
+        "tool_contract_id": "mk_hello_world.tasks.dev_filter_fasta"
+    },
+    "tool_contract_id": "mk_hello_world.tasks.dev_filter_fasta",
+    "version": "0.1.1"
+}
