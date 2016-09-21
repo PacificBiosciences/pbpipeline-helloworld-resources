@@ -30,6 +30,12 @@ def to_bindings():
     return [("$entry:e_01", "mk_hello_world.tasks.mk_simple_txt:0")]
 
 
+@registry("dev_hello_subreadset", "Dev HelloWorld SubreadSet Pipeline", "0.1.0")
+def to_bindings():
+    # Simple task for starting from a SubreadSet
+    return [("$entry:e_01", "mk_hello_world.tasks.hello_world_subreadset:0")]
+
+
 @registry("mk_test2", "MK Test 2", "0.1.0", tags=("dev", "hello-world"), task_options=_example_topts())
 def to_bs():
     """Custom Pipeline Registry for dev hello world tasks"""

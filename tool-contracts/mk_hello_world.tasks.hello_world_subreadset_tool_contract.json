@@ -1,0 +1,61 @@
+{
+    "driver": {
+        "env": {},
+        "exe": "hello-registry.py  run-rtc  ",
+        "serialization": "json"
+    },
+    "tool_contract": {
+        "_comment": "Created by v0.4.9",
+        "description": "Quick tool hello_world_subreadset mk_hello_world.tasks.hello_world_subreadset",
+        "input_types": [
+            {
+                "description": "description for PacBio.DataSet.SubreadSet_0",
+                "file_type_id": "PacBio.DataSet.SubreadSet",
+                "id": "Label PacBio.DataSet.SubreadSet_0",
+                "title": "<DataSetFileType id=PacBio.DataSet.SubreadSet name=file >"
+            }
+        ],
+        "is_distributed": false,
+        "name": "Tool hello_world_subreadset",
+        "nproc": 1,
+        "output_types": [
+            {
+                "default_name": "file",
+                "description": "description for <FileType id=PacBio.FileTypes.txt name=file >",
+                "file_type_id": "PacBio.FileTypes.txt",
+                "id": "Label PacBio.FileTypes.txt_0",
+                "title": "<FileType id=PacBio.FileTypes.txt name=file >"
+            }
+        ],
+        "resource_types": [],
+        "schema_options": [
+            {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "pb_option": {
+                    "default": "Hello SubreadSetDev message",
+                    "description": "Option subreadset_message description",
+                    "name": "Option subreadset_message",
+                    "option_id": "mk_hello_world.task_options.subreadset_message",
+                    "type": "string"
+                },
+                "properties": {
+                    "mk_hello_world.task_options.subreadset_message": {
+                        "default": "Hello SubreadSetDev message",
+                        "description": "Option subreadset_message description",
+                        "title": "Option subreadset_message",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "mk_hello_world.task_options.subreadset_message"
+                ],
+                "title": "JSON Schema for mk_hello_world.task_options.subreadset_message",
+                "type": "object"
+            }
+        ],
+        "task_type": "pbsmrtpipe.task_types.standard",
+        "tool_contract_id": "mk_hello_world.tasks.hello_world_subreadset"
+    },
+    "tool_contract_id": "mk_hello_world.tasks.hello_world_subreadset",
+    "version": "0.1.0"
+}

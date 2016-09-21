@@ -1,5 +1,5 @@
 {
-    "_comment": "Created pipeline mk_hello_world.pipelines.mk_test2 with pbsmrtpipe v0.42.1", 
+    "_comment": "Created pipeline mk_hello_world.pipelines.mk_test2 with pbsmrtpipe v0.43.3", 
     "bindings": [
         {
             "in": {

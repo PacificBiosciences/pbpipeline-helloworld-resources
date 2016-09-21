@@ -77,6 +77,15 @@ def run_rtc(rtc):
     return run_main_dev_hello_world(rtc.task.input_files[0], rtc.task.output_files[0])
 
 
+@registry("hello_world_subreadset", '0.1.0', FileTypes.DS_SUBREADS, FileTypes.TXT,
+          is_distributed=False,
+          options=dict(subreadset_message="Hello SubreadSetDev message"))
+def run_rtc(rtc):
+    """Example Task for Starting with a SubreadSet and emitting a txt file
+    """
+    return run_main_dev_hello_world(rtc.task.input_files[0], rtc.task.output_files[0])
+
+
 @registry("dev_fastq_to_fasta", "0.1.0", FileTypes.FASTQ, FileTypes.FASTA, is_distributed=False)
 def run_rtc(rtc):
     return _fastq_to_fasta(rtc.task.input_files[0], rtc.task.output_files[0])

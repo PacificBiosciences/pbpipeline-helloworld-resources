@@ -1,0 +1,33 @@
+{
+    "_comment": "Created pipeline mk_hello_world.pipelines.dev_hello_subreadset with pbsmrtpipe v0.43.3", 
+    "bindings": [], 
+    "description": "Pipeline mk_hello_world.pipelines.dev_hello_subreadset description", 
+    "entryPoints": [
+        {
+            "entryId": "e_01", 
+            "fileTypeId": "PacBio.DataSet.SubreadSet", 
+            "name": "Entry Name: PacBio.DataSet.SubreadSet", 
+            "tasks": [
+                {
+                    "index": 0, 
+                    "instanceId": 0, 
+                    "taskTypeId": "mk_hello_world.tasks.hello_world_subreadset"
+                }
+            ]
+        }
+    ], 
+    "id": "mk_hello_world.pipelines.dev_hello_subreadset", 
+    "name": "Dev HelloWorld SubreadSet Pipeline", 
+    "options": [], 
+    "tags": [], 
+    "taskOptions": [
+        {
+            "default": "Hello SubreadSetDev message", 
+            "description": "Option subreadset_message description", 
+            "id": "mk_hello_world.task_options.subreadset_message", 
+            "name": "Option subreadset_message", 
+            "optionTypeId": "pbsmrtpipe.option_types.string"
+        }
+    ], 
+    "version": "0.1.0"
+}
