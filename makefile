@@ -1,7 +1,9 @@
 PROJ_DIR := $(abspath $(lastword $(MAKEFILE_LIST)))
 
 emit-pipelines:
-	python custom_pipelines.py --log-level=INFO resolved-pipeline-templates
+	# this needs to be unset to avoid loading the current custom pipelines. 
+	# Re-emitting the pipelines willl overwrite existing ones.
+	unset PB_PIPELINE_TEMPLATE_DIR && python custom_pipelines.py --log-level=INFO resolved-pipeline-templates
 
 emit-tool-contracts:
 	bin/hello-registry.py emit-tool-contracts -o tool-contracts
