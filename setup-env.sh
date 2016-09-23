@@ -6,8 +6,12 @@ export PB_TOOL_CONTRACT_DIR=${PROJ_DIR}/tool-contracts
 export PB_RULES_REPORT_VIEW_DIR=${PROJ_DIR}/rules-report-view
 export PB_RULES_PIPELINE_VIEW_DIR=${PROJ_DIR}/rules-pipeline-template-view
 
+# Requires pbsmrtpipe >= 0.43.2
+export PB_CHUNK_OPERATOR_DIR=${PROJ_DIR}/chunk-operators
+
 # Extend the PATH to include our custom exe(s)
 export PATH=${PROJ_DIR}/bin:$PATH
 
 # For use in a SMRT Link install, Setting export SMRT_PYTHON_PASS_PATH_ENVVARS="YES"
 # Will allow your value of $PATH to be used (however, it will be prepended/modified)
+export SMRT_PYTHON_PASS_PATH_ENVVARS="YES"
