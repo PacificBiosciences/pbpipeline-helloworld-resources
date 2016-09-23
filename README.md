@@ -4,7 +4,7 @@ Example SMRT Link `bundle` extension of Pipeline resources used by smrtflow and 
 
 ## Registered Core Resources
 
-- Custom *Tool Contracts* are defined using Tool Contract interface defined in [pbcommand](https://github.com/PacificBiosciences/pbcommand). Examples exes are in `bin`. Then can be emitted to (static) JSON files using  
+- Custom *Tool Contracts* are defined using Tool Contract interface defined in [pbcommand](https://github.com/PacificBiosciences/pbcommand). Examples exes are in `bin`. Then can be emitted to (static) JSON files using `$EXE --emit-tool-contract`. 
 - Custom *Pipelines* are defined in `custom_pipelines.py` and can be emitted to a (static) JSON form by running `python custom_pipelines.py resolved-pipeline-templates`. 
 - Custom Pipeline Template Presets are groupings of task options for a specific pipeline id.
 
@@ -31,12 +31,12 @@ The registered resources that are loaded by the SMRT Link Services and pbsmrtpip
 - Pipeline View Rules (XML files in dir): **PB_RULES_PIPELINE_VIEW_DIR**
 - Chunk Operators (XML files in dir): **PB_CHUNK_OPERATOR_DIR**
 
+See `setup-env.sh` for an explicit example; this can serve as a template
+for other similar customizations (i.e. by setting `PROJ_DIR` differently).
+
 ## Environment Setup for Commandline (from pbsmrtpipe)
 
 Before running the `pbsmrtpipe` exe to run a pipeline execution, run the `setup-env.sh` to set the necessary ENV variables. Once these are set you pipelines and tool contracts can accessible by showing the registered resources by running `pbsmrtpipe show-templates` and `pbsmrtpipe show-tasks`, respectively.
-
-See `setup-env.sh` for an explicit example.
-
 
 Note, for using in `pbsmrtpipe` from a SMRT Link install you *must* set `export SMRT_PYTHON_PASS_PATH_ENVVARS="YES"` for your custom `PATH` to be retained.
 
@@ -52,7 +52,7 @@ Verification that your custom pipelines have been successfully registered can be
 
 `curl http://<SL_HOST>:<SL_PORT>/secondary-analysis/resolved-pipeline-templates`
 
-Or explicitly look for a specific pipeline by id (CUSTOM_PIPELINE_ID)
+Or explicitly look for a specific pipeline by id (`CUSTOM_PIPELINE_ID`)
 
 `curl http://<SL_HOST>:<SL_PORT>/secondary-analysis/resolved-pipeline-templates/<CUSTOM_PIPELINE_ID>`
 
