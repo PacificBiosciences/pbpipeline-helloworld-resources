@@ -18,7 +18,7 @@ show-tasks:
 	pbsmrtpipe show-tasks
 
 test-dev:
-	source setup-env.sh && cd testkit-data && pbtestkit-multirunner --debug --nworkers 8 testkit.fofn
+	/bin/bash -c "source setup-env.sh && cd testkit-data && pbtestkit-multirunner --debug --nworkers 8 testkit.fofn && cd -"
 
 run-testkit: test-dev
 
