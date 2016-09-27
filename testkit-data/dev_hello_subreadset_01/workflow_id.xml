@@ -2,7 +2,7 @@
 <pipeline-template>
 
     <!-- Reference a workflow template defined in -->
-    <import-template id="pbpipelines_internal.pipelines.dev_a" />
+    <import-template id="mk_hello_world.pipelines.dev_hello_subreadset" />
 
     <options>
     <!-- workflow level options  -->

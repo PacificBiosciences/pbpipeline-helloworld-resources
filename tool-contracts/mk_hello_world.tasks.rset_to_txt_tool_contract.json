@@ -5,7 +5,7 @@
         "serialization": "json"
     },
     "tool_contract": {
-        "_comment": "Created by v0.4.9",
+        "_comment": "Created by v0.4.11",
         "description": "Quick tool rset_to_txt mk_hello_world.tasks.rset_to_txt",
         "input_types": [
             {

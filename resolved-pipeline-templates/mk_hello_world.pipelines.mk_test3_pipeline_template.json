@@ -1,5 +1,5 @@
 {
-    "_comment": "Created pipeline mk_hello_world.pipelines.mk_test3 with pbsmrtpipe v0.43.3", 
+    "_comment": "Created pipeline mk_hello_world.pipelines.mk_test3 with pbsmrtpipe v0.43.4", 
     "bindings": [
         {
             "in": {
@@ -10,7 +10,7 @@
             "out": {
                 "index": 0, 
                 "instanceId": 0, 
-                "taskTypeId": "mk_hello_world.tasks.mk_simple_txt"
+                "taskTypeId": "mk_hello_world.tasks.dev_hello_world"
             }
         }, 
         {
@@ -36,7 +36,7 @@
                 {
                     "index": 0, 
                     "instanceId": 0, 
-                    "taskTypeId": "mk_hello_world.tasks.mk_simple_txt"
+                    "taskTypeId": "mk_hello_world.tasks.dev_hello_world"
                 }
             ]
         }
@@ -48,6 +48,13 @@
         "dev"
     ], 
     "taskOptions": [
+        {
+            "default": "Preset Custom Dev Message from register pipeline", 
+            "description": "Option dev_message description", 
+            "id": "mk_hello_world.task_options.dev_message", 
+            "name": "Option dev_message", 
+            "optionTypeId": "pbsmrtpipe.option_types.string"
+        }, 
         {
             "default": 50, 
             "description": "Option dev_fasta_min_length description", 
