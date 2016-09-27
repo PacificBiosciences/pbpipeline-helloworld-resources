@@ -25,14 +25,15 @@ def _example_topts():
             "mk_hello_world.task_options.nrecords": 12345}
 
 
-@registry("mk_test1", "MK Test 1", "0.1.0", task_options=_example_topts())
+@registry("mk_test1", "MK Test 1", "0.2.0", task_options=_example_topts())
 def to_bindings():
-    return [("$entry:e_01", "mk_hello_world.tasks.mk_simple_txt:0")]
+    """Simple test to write a Txt file. """
+    return [("$entry:e_01", "mk_hello_world.tasks.dev_hello_world:0")]
 
 
-@registry("dev_hello_subreadset", "Dev HelloWorld SubreadSet Pipeline", "0.1.0")
+@registry("dev_hello_subreadset", "Dev HelloWorld SubreadSet Pipeline", "0.2.0")
 def to_bindings():
-    # Simple task for starting from a SubreadSet
+    """Simple Example of Using a SubreadSet to drive a pipeline"""
     return [("$entry:e_01", "mk_hello_world.tasks.hello_world_subreadset:0")]
 
 
@@ -52,10 +53,10 @@ def to_bs():
 
 @registry("mk_test3", "MK Test 3", "0.1.0", tags=("dev",), task_options=_example_topts())
 def to_bs():
-    """Custom Pipeline B for testing"""
+    """Custom Pipeline for showing how to leverage previously defined pipelines"""
 
     # Reuse mk_test_1 pipeline output
-    b1 = [("mk_hello_world.pipelines.mk_test1:mk_hello_world.tasks.mk_simple_txt:0", "pbsmrtpipe.tasks.dev_txt_to_fasta:0")]
+    b1 = [("mk_hello_world.pipelines.mk_test1:mk_hello_world.tasks.dev_hello_world:0", "pbsmrtpipe.tasks.dev_txt_to_fasta:0")]
 
     b3 = [("pbsmrtpipe.tasks.dev_txt_to_fasta:0", 'pbsmrtpipe.tasks.dev_filter_fasta:0')]
     return b1 + b3

@@ -5,7 +5,7 @@
         "serialization": "json"
     },
     "tool_contract": {
-        "_comment": "Created by v0.4.9",
+        "_comment": "Created by v0.4.11",
         "description": "Quick tool hello_world_subreadset mk_hello_world.tasks.hello_world_subreadset",
         "input_types": [
             {

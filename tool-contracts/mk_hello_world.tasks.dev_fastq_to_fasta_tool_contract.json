@@ -5,7 +5,7 @@
         "serialization": "json"
     },
     "tool_contract": {
-        "_comment": "Created by v0.4.9",
+        "_comment": "Created by v0.4.11",
         "description": "Quick tool dev_fastq_to_fasta mk_hello_world.tasks.dev_fastq_to_fasta",
         "input_types": [
             {
