@@ -1,17 +1,18 @@
 # pbpipeline-helloworld-resources
 
-Example SMRT Link `bundle` extension of Pipeline resources used by smrtflow and pbsmrtpipe in SMRT Link
+Example SMRT Link `bundle` extension of Pipeline resources used by smrtflow and pbsmrtpipe in SMRT Link.
 
 ## Registered Core Resources
 
-- Custom *Tool Contracts* are defined using Tool Contract interface defined in [pbcommand](https://github.com/PacificBiosciences/pbcommand). Examples exes are in `bin`. Then can be emitted to (static) JSON files using `$EXE --emit-tool-contract`. 
+- Custom *Tool Contracts* are defined using Tool Contract interface defined in [pbcommand](https://github.com/PacificBiosciences/pbcommand). Examples exes are in `bin`. Then can be emitted to (static) JSON files using `$EXE --emit-tool-contract` or `$EXE emit-tool-contracts` if using the `registry` model.  
 - Custom *Pipelines* are defined in `custom_pipelines.py` and can be emitted to a (static) JSON form by running `python custom_pipelines.py resolved-pipeline-templates`. 
-- Custom Pipeline Template Presets are groupings of task options for a specific pipeline id.
+- Custom *Pipeline Template Presets* are groupings of task options for a specific pipeline id.
+- Custom *Chunk Operators* are XML mappings of how a task is scatter/gathered. See the [pbsmrtpipe docs](pbsmrtpipe.readthedocs.org) for details on the Chunking Framework
 
-Other custom view rule resources:
+Other custom view rules and resources:
 
 - Pipeline Template View Rules
-- Report View Rules 
+- Report View Rules
 
 ## Requirements and Install
 
@@ -19,6 +20,29 @@ Other custom view rule resources:
 - [pbsmrtpipe](https://github.com/PacificBiosciences/pbsmrtpipe)
 
 See the respective repos for install directions.
+
+
+## Defining Custom Tool Contracts (i.e.,Tasks) and Pipelines
+
+### Tool Contracts
+
+Custom tasks can be defined using the PacBio Tool Contract interface. See [pbcommand](https://github.com/PacificBiosciences/pbcommand) repo for examples and the [pbcommand docs](http://pbcommand.readthedocs.io/)for more details.
+
+Examples tasks are provided in `bin`, specifically, `hello-registry.py`. This is an example of the `quick` interface to register several tasks using a subparser-esque model. 
+
+The static tool contract JSON files can be emitted using `bin/hello-registry.py emit-tool-contracts -o /path/to/output/tool-contracts`
+
+
+### Defining Pipelines
+
+
+Pipelines can be defined programmatically using python to encode the edges in the graph using a simple model using `bindings` (edges in graph).
+ 
+
+Several example pipelines are defined in `custom_pipelines.py`. The static resolved pipeline templates can be emitted using `python custom_pipelines.py /path/to/resolved-pipeline-templates` (Note this requires setting up the ENV correctly. See the makefile targets `emit-pipelines` for details. This will emit static JSON files that can be loaded by both `pbsmrtpipe` and `SMRT Link Analysis Services`.
+
+
+Please see [pbsmrtpipe docs]([pbsmrtpipe](pbsmrtpipe.readthedocs.org)) for more detail on pipeline creation and pipeline bindings.
 
 
 # Environment Setup
@@ -63,16 +87,25 @@ The recommended model is to create a testkit job using a testkit.cfg file that r
 
 Example testkit jobs are in `testkit-data`
 
-From the commandline within your the directory that contains the testkit.cfg
+From the commandline within your the directory that contains the testkit.cfg (e.g., dev_hello_subreadset_01)
 
 `pbtestkit-runner testkit.cfg`
 
 This will run `pbsmrtpipe` and to core/basic validation on the job output. See `--help` for more details.
 
+For running all the testkit jobs in `testkit-data`:
+
+`pbtestkit-multirunner testkit-data/testkit.fofn`
+
+
 Similarly, testkit jobs can be run from the SMRT Link Services.
  
 `pbtestkit-service-runner testkit.cfg --host=my-host --port=8081 --debug`
 
-Note, this usecase is specifically for PacBio DataSet driven pipelines (i.e., pipelines driven from a SubreadSet, ReferenceSet, ...) and is *not* general to any pipeline. 
+Note, this usecase is specifically for PacBio DataSet driven pipelines (i.e., pipelines driven from a SubreadSet, ReferenceSet, ...) and is *not* general to any pipeline.
+ 
+Run all the service runnable teskit jobs in `testkit-data`:
+ 
+`pbtestkit-service-multirunner testk-data/services-testkit.fofn --host=my-host --port=8081 --debug`
 
 
