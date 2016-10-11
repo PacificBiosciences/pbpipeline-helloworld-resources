@@ -118,3 +118,17 @@ Run all the service runnable teskit jobs in `testkit-data`:
 `pbtestkit-service-multirunner testk-data/services-testkit.fofn --host=my-host --port=8081 --debug`
 
 
+## SMRTLINK JSON Bundle Resources Spec
+
+
+- PB_BUNDLE (*Required* String `[A-z0-9_\-]`) Must be a globally unique name of your bundle
+- PB_PIPELINE_TEMPLATE_DIR (*Required* String) Path to resolved pipeline template(s) JSON files
+- PB_TOOL_CONTRACT_DIR (*Required* String) Path to tool contract(s) JSON files
+- PB_RULES_REPORT_VIEW_DIR (*Required* String) Path to report view rules JSON files
+- PB_RULES_PIPELINE_VIEW_DIR (*Required* String) Path to pipeline view rules JSON files
+- PB_CHUNK_OPERATOR_DIR (*Required* String) Path to chunk operator XML files
+- PB_PIPELINE_BIN_DIR (*Optional* String) Path to bin exes
+
+All paths can be full or relative the `smrtlink-bundle-resources.json` file. Optional means the key must be provided but is null.
+
+[See Example](https://github.com/PacificBiosciences/pbpipeline-helloworld-resources/blob/master/smrtlink-bundle-resources.json)
