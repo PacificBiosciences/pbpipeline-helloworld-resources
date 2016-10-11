@@ -132,3 +132,6 @@ Run all the service runnable teskit jobs in `testkit-data`:
 All paths can be full or relative the `smrtlink-bundle-resources.json` file. Optional means the key must be provided but is null.
 
 [See Example](https://github.com/PacificBiosciences/pbpipeline-helloworld-resources/blob/master/smrtlink-bundle-resources.json)
+
+
+Note, `PB_CUSTOM_PIPELINE_PATH` is not directly supported at the commandline or in SMRT Link Analysis services.
