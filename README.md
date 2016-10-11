@@ -2,6 +2,8 @@
 
 Example SMRT Link `bundle` extension of Pipeline resources used by smrtflow and pbsmrtpipe in SMRT Link.
 
+The SMRT Link resource manifest is defined in `smrtlink-bundle-resources.json`
+
 ## Registered Core Resources
 
 - Custom *Tool Contracts* are defined using Tool Contract interface defined in [pbcommand](https://github.com/PacificBiosciences/pbcommand). Examples exes are in `bin`. Then can be emitted to (static) JSON files using `$EXE --emit-tool-contract` or `$EXE emit-tool-contracts` if using the `registry` model.  
@@ -68,11 +70,18 @@ Note, for using in `pbsmrtpipe` from a SMRT Link install you *must* set `export 
 
 For extending an official SMRT Link install and to use your custom pipelines within the SMRT Link UI, you must do the following.
 
-- shutdown the SMRT Link services
-- setup the ENV to source your custom `setup-env.sh` which will enable both the SMRT Link Services and pbsmrtpipe to be aware of these resources
-- restart the SMRT Link services
+1. shutdown the SMRT Link services using `$SMRT_ROOT/admin/bin/services-stop`
+2. Add custom pipeline to smrtlink install tree. The recommended approach is to put the custom pipeline directory into the $SMRT_ROOT/current/addons/pipelines directory, then add a 'current' symlink in that directory pointing to is.
 
-Verification that your custom pipelines have been successfully registered can be performed by using this call the SL services.
+```
+cd $SMRT_ROOT
+mkdir -p current/addons/pipelines
+cp -a your-custom-pipeline-dir current/addons/pipelines
+ln -s your-custom-pipeline-dir current/addons/pipelines/current
+```
+
+3. Restart the services using `$SMRT_ROOT/admin/bin/services-start`
+4. Verification that your custom pipelines have been successfully registered can be performed by using this call the SL services.
 
 `curl http://<SL_HOST>:<SL_PORT>/secondary-analysis/resolved-pipeline-templates`
 
@@ -109,3 +118,20 @@ Run all the service runnable teskit jobs in `testkit-data`:
 `pbtestkit-service-multirunner testk-data/services-testkit.fofn --host=my-host --port=8081 --debug`
 
 
+## SMRTLINK JSON Bundle Resources Spec
+
+
+- PB_BUNDLE (*Required* String `[A-z0-9_\-]`) Must be a globally unique name of your bundle
+- PB_PIPELINE_TEMPLATE_DIR (*Required* String) Path to resolved pipeline template(s) JSON files
+- PB_TOOL_CONTRACT_DIR (*Required* String) Path to tool contract(s) JSON files
+- PB_RULES_REPORT_VIEW_DIR (*Required* String) Path to report view rules JSON files
+- PB_RULES_PIPELINE_VIEW_DIR (*Required* String) Path to pipeline view rules JSON files
+- PB_CHUNK_OPERATOR_DIR (*Required* String) Path to chunk operator XML files
+- PB_PIPELINE_BIN_DIR (*Optional* String) Path to bin exes
+
+All paths can be full or relative the `smrtlink-bundle-resources.json` file. Optional means the key must be provided but is null.
+
+[See Example](https://github.com/PacificBiosciences/pbpipeline-helloworld-resources/blob/master/smrtlink-bundle-resources.json)
+
+
+Note, `PB_CUSTOM_PIPELINE_PATH` is not directly supported at the commandline or in SMRT Link Analysis services.
