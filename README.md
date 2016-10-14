@@ -1,6 +1,6 @@
 # pbpipeline-helloworld-resources
 
-Example SMRT Link `bundle` extension of Pipeline resources used by smrtflow and pbsmrtpipe in SMRT Link.
+Example SMRT Link `bundle` extension of Pipeline resources used by smrtflow and pbsmrtpipe (0.44.3) in SMRT Link 3.2.0.s
 
 The SMRT Link resource manifest is defined in `smrtlink-bundle-resources.json`
 
@@ -66,28 +66,70 @@ Before running the `pbsmrtpipe` exe to run a pipeline execution, run the `setup-
 
 Note, for using in `pbsmrtpipe` from a SMRT Link install you *must* set `export SMRT_PYTHON_PASS_PATH_ENVVARS="YES"` for your custom `PATH` to be retained.
 
-## Environment Setup for SMRT Link Services and UI
+## Environment Setup and Testing for SMRT Link Services and UI
 
-For extending an official SMRT Link install and to use your custom pipelines within the SMRT Link UI, you must do the following.
+Create custom pipeline directory
 
-1. shutdown the SMRT Link services using `$SMRT_ROOT/admin/bin/services-stop`
-2. Add custom pipeline to smrtlink install tree. The recommended approach is to put the custom pipeline directory into the $SMRT_ROOT/current/addons/pipelines directory, then add a 'current' symlink in that directory pointing to is.
+1. Stop services, if necessary
+
+```
+$SMRT_ROOT/admin/bin/services-stop
+```
+
+2. Add custom pipeline to smrtlink install tree. The recommended approach is to put the custom pipeline directory into the `$SMRT_ROOT/current/addons/pipelines` directory, then add a 'current' symlink in that directory pointing to is. Something like this procedure:
 
 ```
 cd $SMRT_ROOT
 mkdir -p current/addons/pipelines
 cp -a your-custom-pipeline-dir current/addons/pipelines
-ln -s your-custom-pipeline-dir current/addons/pipelines/current
+mv current/addons/pipelines/your-custom-pipeline-dir 01_current/addons/pipelines/your-custom-pipeline-dir
+```
+ 
+3. Start services
+
+```
+$SMRT_ROOT/admin/bin/services-start
 ```
 
-3. Restart the services using `$SMRT_ROOT/admin/bin/services-start`
-4. Verification that your custom pipelines have been successfully registered can be performed by using this call the SL services.
+4. Test that services recognize custom pipeline ids. Query the service with something like this:
 
-`curl http://<SL_HOST>:<SL_PORT>/secondary-analysis/resolved-pipeline-templates`
+```
+curl http://SMRTLINK_HOST:SMRTLINK_SERVICES_PORT/secondary-analysis/resolved-pipeline-templates/CUSTOM_PIPELINE_ID
+```
 
-Or explicitly look for a specific pipeline by id (`CUSTOM_PIPELINE_ID`)
+5. Test that pbsmrtpipe is using the custom pipeline from the commandline, using something like this (expect zero exit status):
 
-`curl http://<SL_HOST>:<SL_PORT>/secondary-analysis/resolved-pipeline-templates/<CUSTOM_PIPELINE_ID>`
+```
+cd $SMRT_ROOT
+current/smrtcmds/developer/bin/pbtestkit-multirunner --debug --nworkers 8 current/addons/pipelines/current/testkit-data/testkit.fofn
+```
+
+## Example procedure to install smrtlink and custom pipeline and run tests
+
+```
+mkdir testdir
+cd testdir
+
+# Install smrtlink (using a fairly generic install):
+smrtlink-*.run --batch --rootdir ./smrtlink --jmstype NONE --smrtlink-gui-port 9110
+
+# Install pbpipeline-helloworld-resources custom pipeline (using 'git clone')
+mkdir ./smrtlink/current/addons/pipelines
+cd ./smrtlink/current/addons/pipelines
+git clone https://github.com/PacificBiosciences/pbpipeline-helloworld-resources
+mv pbpipeline-helloworld-resources 01_pbpipeline-helloworld-resources
+cd ../../../..
+
+# Start services
+./smrtlink/admin/bin/services-start
+
+# Test that services recognize all custom pipeline ids.  All these commands
+# should return a valid json snipet describing the specified pipeline id.
+curl http://localhost:9111/secondary-analysis/resolved-pipeline-templates/mk_hello_world.pipelines.mk_test1
+curl http://localhost:9111/secondary-analysis/resolved-pipeline-templates/mk_hello_world.pipelines.mk_test2
+curl http://localhost:9111/secondary-analysis/resolved-pipeline-templates/mk_hello_world.pipelines.mk_test3
+curl http://localhost:9111/secondary-analysis/resolved-pipeline-templates/mk_hello_world.pipelines.dev_hello_subreadset
+```
 
 
 ## Testing Pipelines
