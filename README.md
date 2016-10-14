@@ -123,6 +123,7 @@ Run all the service runnable teskit jobs in `testkit-data`:
 
 - PB_BUNDLE (*Required* String `[A-z0-9_\-]`) Must be a globally unique name of your bundle
 - PB_PIPELINE_TEMPLATE_DIR (*Required* String) Path to resolved pipeline template(s) JSON files
+- PB_PIPELINE_TEMPLATE_PRESET_DIR": (*Required* String) Path to resolved pipeline template preset(s) 
 - PB_TOOL_CONTRACT_DIR (*Required* String) Path to tool contract(s) JSON files
 - PB_RULES_REPORT_VIEW_DIR (*Required* String) Path to report view rules JSON files
 - PB_RULES_PIPELINE_VIEW_DIR (*Required* String) Path to pipeline view rules JSON files
