@@ -28,7 +28,7 @@ See the respective repos for install directions.
 
 ### Tool Contracts
 
-Custom tasks can be defined using the PacBio Tool Contract interface. See [pbcommand](https://github.com/PacificBiosciences/pbcommand) repo for examples and the [pbcommand docs](http://pbcommand.readthedocs.io/)for more details.
+Custom tasks can be defined using the PacBio Tool Contract interface. See [pbcommand](https://github.com/PacificBiosciences/pbcommand) repo for examples and the [pbcommand docs](http://pbcommand.readthedocs.io/) for more details.
 
 Examples tasks are provided in `bin`, specifically, `hello-registry.py`. This is an example of the `quick` interface to register several tasks using a subparser-esque model. 
 
@@ -44,7 +44,7 @@ Pipelines can be defined programmatically using python to encode the edges in th
 Several example pipelines are defined in `custom_pipelines.py`. The static resolved pipeline templates can be emitted using `python custom_pipelines.py /path/to/resolved-pipeline-templates` (Note this requires setting up the ENV correctly. See the makefile targets `emit-pipelines` for details. This will emit static JSON files that can be loaded by both `pbsmrtpipe` and `SMRT Link Analysis Services`.
 
 
-Please see [pbsmrtpipe docs]([pbsmrtpipe](pbsmrtpipe.readthedocs.org)) for more detail on pipeline creation and pipeline bindings.
+Please see [pbsmrtpipe docs]([pbsmrtpipe](http://pbsmrtpipe.readthedocs.io/en/master/)) for more detail on pipeline creation and pipeline bindings.
 
 
 # Environment Setup
@@ -70,13 +70,14 @@ Note, for using in `pbsmrtpipe` from a SMRT Link install you *must* set `export 
 
 Create custom pipeline directory
 
-1. Stop services, if necessary
+####1. Stop services, if necessary
 
 ```
 $SMRT_ROOT/admin/bin/services-stop
 ```
 
-2. Add custom pipeline to smrtlink install tree. The recommended approach is to put the custom pipeline directory into the `$SMRT_ROOT/current/addons/pipelines` directory, then add a 'current' symlink in that directory pointing to is. Something like this procedure:
+####2. Add custom pipeline to smrtlink install tree. 
+The recommended approach is to put the custom pipeline directory into the `$SMRT_ROOT/current/addons/pipelines` directory, then add a 'current' symlink in that directory pointing to is. Something like this procedure:
 
 ```
 cd $SMRT_ROOT
@@ -85,19 +86,21 @@ cp -a your-custom-pipeline-dir current/addons/pipelines
 mv current/addons/pipelines/your-custom-pipeline-dir 01_current/addons/pipelines/your-custom-pipeline-dir
 ```
  
-3. Start services
+####3. Start services
 
 ```
 $SMRT_ROOT/admin/bin/services-start
 ```
 
-4. Test that services recognize custom pipeline ids. Query the service with something like this:
+####4. Test that services recognize custom pipeline ids. 
+Query the service with something like this:
 
 ```
 curl http://SMRTLINK_HOST:SMRTLINK_SERVICES_PORT/secondary-analysis/resolved-pipeline-templates/CUSTOM_PIPELINE_ID
 ```
 
-5. Test that pbsmrtpipe is using the custom pipeline from the commandline, using something like this (expect zero exit status):
+####5. Test that pbsmrtpipe is using the custom pipeline from the commandline.
+Use something like this (expect zero exit status):
 
 ```
 cd $SMRT_ROOT
