@@ -117,7 +117,7 @@ cd testdir
 smrtlink-*.run --batch --rootdir ./smrtlink --jmstype NONE --smrtlink-gui-port 9110
 
 # Install pbpipeline-helloworld-resources custom pipeline (using 'git clone')
-mkdir ./smrtlink/current/addons/pipelines
+mkdir -p ./smrtlink/current/addons/pipelines
 cd ./smrtlink/current/addons/pipelines
 git clone https://github.com/PacificBiosciences/pbpipeline-helloworld-resources
 mv pbpipeline-helloworld-resources 01_pbpipeline-helloworld-resources
