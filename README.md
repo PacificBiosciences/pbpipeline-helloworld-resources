@@ -1,6 +1,6 @@
 # pbpipeline-helloworld-resources
 
-Example SMRT Link `bundle` extension of Pipeline resources used by smrtflow and pbsmrtpipe (0.44.3) in SMRT Link 3.2.0.s
+Example SMRT Link `bundle` extension of Pipeline resources used by smrtflow and pbsmrtpipe (0.44.3) in SMRT Link **3.2.0.187627** (limited official release of 3.2.0)
 
 The SMRT Link resource manifest is defined in `smrtlink-bundle-resources.json`
 
@@ -114,7 +114,7 @@ mkdir testdir
 cd testdir
 
 # Install smrtlink (using a fairly generic install):
-smrtlink-*.run --batch --rootdir ./smrtlink --jmstype NONE --smrtlink-gui-port 9110
+smrtlink-*.run --batch --rootdir ./smrtlink --jmstype NONE --smrtlink-gui-port 9110 --smrtlink-services-port 9111
 
 # Install pbpipeline-helloworld-resources custom pipeline (using 'git clone')
 mkdir -p ./smrtlink/current/addons/pipelines
@@ -123,11 +123,21 @@ git clone https://github.com/PacificBiosciences/pbpipeline-helloworld-resources
 mv pbpipeline-helloworld-resources 01_pbpipeline-helloworld-resources
 cd ../../../..
 
-# Start services
+
+# Check to see if the bundled pipelines are registered by `pbsmrtpipe` exe.
+# Look for 
+
+./smrtlink/smrtcmds/bin/pbsmrtpipe show-templates | grep mk_hello_world
+
+
+# Start services 
 ./smrtlink/admin/bin/services-start
+
+# Note when restarting the services you might see warnings of `Failed to make request`. There is a retry mechanism on startup to make sure the services are running. The status of the services are accessible from `admin/bin/services-status`. 
 
 # Test that services recognize all custom pipeline ids.  All these commands
 # should return a valid json snipet describing the specified pipeline id.
+# Note the custom 9111 SL Analysis services port.
 curl http://localhost:9111/secondary-analysis/resolved-pipeline-templates/mk_hello_world.pipelines.mk_test1
 curl http://localhost:9111/secondary-analysis/resolved-pipeline-templates/mk_hello_world.pipelines.mk_test2
 curl http://localhost:9111/secondary-analysis/resolved-pipeline-templates/mk_hello_world.pipelines.mk_test3
@@ -137,7 +147,7 @@ curl http://localhost:9111/secondary-analysis/resolved-pipeline-templates/mk_hel
 
 ## Testing Pipelines
 
-The recommended model is to create a testkit job using a testkit.cfg file that references a small input dataset types. This intergration test framework will help debug pipeline and tool contracts from the *both* the commandline as well as from the services.
+The recommended model is to create a testkit job using a testkit.cfg file that references a small input dataset types. This integration test framework will help debug pipeline and tool contracts from the *both* the commandline as well as from the services.
 
 Example testkit jobs are in `testkit-data`
 
