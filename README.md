@@ -113,8 +113,12 @@ current/smrtcmds/developer/bin/pbtestkit-multirunner --debug --nworkers 8 curren
 mkdir testdir
 cd testdir
 
-# Install smrtlink (using a fairly generic install):
+# Install smrtlink (using a fairly generic install)
+# For 4.0 and later (there are no restrictions on which ports you use, here we use 9110 and 9111):
 smrtlink-*.run --batch --rootdir ./smrtlink --jmstype NONE --smrtlink-gui-port 9110 --smrtlink-services-port 9111
+
+# For 3.2 (you must use services port 8081):
+smrtlink-*.run --batch --rootdir ./smrtlink --jmstype NONE --smrtlink-gui-port 8080 --smrtlink-services-port 8081
 
 # Install pbpipeline-helloworld-resources custom pipeline (using 'git clone')
 mkdir -p ./smrtlink/current/addons/pipelines
@@ -137,11 +141,18 @@ cd ../../../..
 
 # Test that services recognize all custom pipeline ids.  All these commands
 # should return a valid json snipet describing the specified pipeline id.
-# Note the custom 9111 SL Analysis services port.
+
+# For 4.0 and later (note the custom 9111 SL Analysis services port).
 curl http://localhost:9111/secondary-analysis/resolved-pipeline-templates/mk_hello_world.pipelines.mk_test1
 curl http://localhost:9111/secondary-analysis/resolved-pipeline-templates/mk_hello_world.pipelines.mk_test2
 curl http://localhost:9111/secondary-analysis/resolved-pipeline-templates/mk_hello_world.pipelines.mk_test3
 curl http://localhost:9111/secondary-analysis/resolved-pipeline-templates/mk_hello_world.pipelines.dev_hello_subreadset
+
+# For 3.2 (note the custom 8081 SL Analysis services port).
+curl http://localhost:8081/secondary-analysis/resolved-pipeline-templates/mk_hello_world.pipelines.mk_test1
+curl http://localhost:8081/secondary-analysis/resolved-pipeline-templates/mk_hello_world.pipelines.mk_test2
+curl http://localhost:8081/secondary-analysis/resolved-pipeline-templates/mk_hello_world.pipelines.mk_test3
+curl http://localhost:8081/secondary-analysis/resolved-pipeline-templates/mk_hello_world.pipelines.dev_hello_subreadset
 ```
 
 
